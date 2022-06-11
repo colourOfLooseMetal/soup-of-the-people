@@ -12,20 +12,28 @@ ingredients = []
 #test random choice from dict keys
 # print(random.choice(list(ingredientRatioDict.keys())))
 #for each person
-for peep in peeps:
-    #if shivan, protein (ye gains)
-    if peep == "shivan":
-        ingredient = "protein"
-    else:
-        #assign a random ingredient from the dict keys
-        ingredient = random.choice(list(ingredientRatioDict.keys()))
-    #if we have as much as we need already
-    if ingredients.count(ingredient) >= ingredientRatioDict[ingredient]:
-        #randomly pick ingredients until we choose one we dont have enough of yet
-        while ingredients.count(ingredient) > ingredientRatioDict[ingredient]:
+peepsNum = len(peeps)
+ingredientNum = 0
+for value in list(ingredientRatioDict.values()):
+    ingredientNum += value
+# print(peepsNum, ingredientNum)
+if peepsNum != ingredientNum:
+    print("wrong amount of ingredients for the number of ppl")
+else:
+    for peep in peeps:
+        #if shivan, protein (ye gains)
+        if peep == "shivan":
+            ingredient = "protein"
+        else:
+            #assign a random ingredient from the dict keys
             ingredient = random.choice(list(ingredientRatioDict.keys()))
-    #add it to ingredients list
-    ingredients.append(ingredient)
-#print results
-for i in range(len(peeps)):
-    print(peeps[i], ": ", ingredients[i])
+        #if we have as much as we need already
+        if ingredients.count(ingredient) >= ingredientRatioDict[ingredient]:
+            #randomly pick ingredients until we choose one we dont have enough of yet
+            while ingredients.count(ingredient) >= ingredientRatioDict[ingredient]:
+                ingredient = random.choice(list(ingredientRatioDict.keys()))
+        #add it to ingredients list
+        ingredients.append(ingredient)
+    #print results
+    for i in range(len(peeps)):
+        print(peeps[i], ": ", ingredients[i])
